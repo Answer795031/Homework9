@@ -54,8 +54,8 @@ public class Main {
          */
 
         int[] arr = generateRandomArray();
-        int maxElement = -1;
-        int minElement;
+        int maxElement = Integer.MIN_VALUE;         // Константа - минимальное возможное значение int
+        int minElement = Integer.MAX_VALUE;         // Константа - максимальное возможное значение int
 
         System.out.println("Ежемесячные траты: ");
         for (int i = 0; i < arr.length; i++){
@@ -67,17 +67,11 @@ public class Main {
         System.out.println("\n");
 
         // for
-        for (int i = 0; i < arr.length; i++){       // Ищем максимальный элемент
+        for (int i = 0; i < arr.length; i++){
             final int current = arr[i];
-            if (current > maxElement){
+            if (current > maxElement){				// Ищем максимальный элемент
                 maxElement = current;
-            }
-        }
-        minElement = maxElement;
-
-        for (int i = 0; i < arr.length; i++){       // Ищем минимальный элемент
-            final int current = arr[i];
-            if (current < minElement){
+            } else if (current < minElement){		// Ищем минимальный элемент
                 minElement = current;
             }
         }
@@ -85,17 +79,13 @@ public class Main {
         System.out.println("Минимальная сумма трат за месяц: " + minElement + " рублей\n");
 
         //for-each
-        maxElement = 0;                // Обнуляем переменные для запуска след.способа
+        maxElement = Integer.MIN_VALUE;             // Обнуляем переменные для запуска след.способа
+        minElement = Integer.MAX_VALUE;
 
         for (int current : arr) {                   // Ищем максимальный элемент
             if (current > maxElement) {
                 maxElement = current;
-            }
-        }
-        minElement = maxElement;
-
-        for (int current : arr) {                   // Ищем минимальный элемент
-            if (current < minElement) {
+            } else if (current < minElement){
                 minElement = current;
             }
         }
@@ -156,22 +146,7 @@ public class Main {
 
         char[] reverseFullName = {'n', 'a', 'v', 'I', ' ', 'v', 'o', 'n', 'a', 'v', 'I'};
 
-        /*
-        Для того чтобы отобразить элементы массива в обратном порядке, напишем цикл, результатом которого будет замена
-        значений элементов массива: первого с последним, второго с предпоследним и т.д.
-        Таким образом, необходимо будет ввести дополнительную переменную для промежуточной записи значения [i] элемента,
-        чтобы затем присвоить это значение элементу [reverseFullName.length - i] и так по кругу, сдвигаясь к центру массива.
-
-        Соответственно, если в массиве четное число элементов, то центральные два элемента поменяются значениями.
-        Если элементов нечетное число, то центральный элемент останется неизменным.
-        */
-
-        for (int i = 0; i < reverseFullName.length; i++){
-            if (i < reverseFullName.length / 2){                                        // Идем только по первой половине массива
-                final char replacementChar = reverseFullName[i];                        // Доп.переменная для замены значений между [i] и [reverseFullName.length - i]
-                reverseFullName[i] = reverseFullName[reverseFullName.length - i - 1];   // [i] теперь равна [reverseFullName.length - i]
-                reverseFullName[reverseFullName.length - i - 1] = replacementChar;      // [reverseFullName.length - i] теперь равна [i]
-            }
+        for (int i = reverseFullName.length - 1; i >= 0; i--){
             System.out.print(reverseFullName[i]);
         }
     }
